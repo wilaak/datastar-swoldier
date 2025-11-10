@@ -1,0 +1,29 @@
+{
+    "name": "wilaak/datastar-swoldier",
+    "description": "Datastar SDK for Swoldier",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "starfederation/datastar-php": "1.0.0-RC.3",
+        "wilaak/swoldier": "v0.1",
+        "swoole/ide-helper": "^6.0",
+        "php": ">=8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "DatastarSwoldier\\": "src/"
+        }
+    },
+    "minimum-stability": "RC",
+    "support": {
+        "docs": "https://github.com/wilaak/datastar-swoldier",
+        "source": "https://github.com/wilaak/datastar-swoldier",
+        "issues": "https://github.com/wilaak/datastar-swoldier/issues"
+    },
+    "authors": [
+        {
+            "name": "wilaak",
+            "email": "54738571+wilaak@users.noreply.github.com"
+        }
+    ]
+}
