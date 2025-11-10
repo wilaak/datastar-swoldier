@@ -3,7 +3,7 @@
 
 # Datastar SDK for Swoldier
 
-This package offers an SDK for working with [Datastar](https://data-star.dev) in the [Swoldier](https://github.com/wilaak/swoldier) micro-framework.
+This package offers an SDK for working with [Datastar](https://data-star.dev) in [Swoldier](https://github.com/wilaak/swoldier).
 
 ## Install 
 
@@ -11,7 +11,11 @@ This package offers an SDK for working with [Datastar](https://data-star.dev) in
 
 ## Usage
 
+A minimal example of using Datastar with Swoldier:
+
 ```PHP
+<?php 
+
 use Swoole\{Runtime, Http\Server};
 use Swoldier\{Router, HttpContext};
 
@@ -24,12 +28,24 @@ $server = new Server("0.0.0.0", 8082);
 $router = new Router($server);
 
 $router->map('GET', '/', function (HttpContext $ctx) {
-    $sse = new SSE($ctx);
-
-    $sse->patchElements('<h1>Welcome to Datastar with Swoldier!</h1>', [
-        'selector' => '#app',
-        'mode' => ElementPatchMode::Replace,
-    ]);
+    if (SSE::isDatastarRequest($ctx)) {
+        $sse = new SSE($ctx);
+        $sse->patchElements('<h1 id="message">Welcome to Datastar with Swoldier!</h1>');
+        return;
+    }
+    $ctx->html(<<<'HTML'
+     <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="module" src="/path/to/datastar.js"></script>
+    </head>
+    <body data-init="@get('/')">
+        <div id="message"></div>
+    </body>
+    </html>
+    HTML);
 });
 
 $server->start();

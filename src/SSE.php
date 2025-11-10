@@ -23,11 +23,6 @@ use Swoldier\HttpContext;
 class SSE
 {
     /**
-     * Whether the response headers have been sent.
-     */
-    public bool $sentHeaders = false;
-
-    /**
      * Constructor for the SSE generator.
      *
      * @param HttpContext $ctx The swoldier HTTP context containing the request and response objects.
@@ -35,6 +30,14 @@ class SSE
     public function __construct(
         private HttpContext $ctx,
     ) {}
+
+    /**
+     * Checks if the incoming request is a Datastar request.
+     */
+    public static function isDatastarRequest(HttpContext $ctx): bool
+    {
+        return $ctx->getHeader('datastar-request') !== null;
+    }
 
     /**
      * Returns the signals sent in the incoming request.
@@ -51,7 +54,7 @@ class SSE
      */
     public function sendHeaders(): void
     {
-        if ($this->sentHeaders) {
+        if ($this->ctx->isCommitted()) {
             return;
         }
 
@@ -143,7 +146,7 @@ class SSE
      */
     protected function sendEvent(EventInterface $event): string
     {
-        if (!$this->sentHeaders) {
+        if (!$this->ctx->isCommitted()) {
             $this->sendHeaders();
         }
         $output = $event->getOutput();
