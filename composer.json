@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "starfederation/datastar-php": "1.0.0-RC.3",
-        "wilaak/swoldier": "^0.1.1",
+        "wilaak/swoldier": "^0.2",
         "swoole/ide-helper": "^6.0",
         "php": ">=8.2"
     },
