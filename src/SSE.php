@@ -139,7 +139,7 @@ class SSE
     }
 
     /**
-     * Sends an event using the Swoole HTTP response object and returns the resulting output.
+     * Sends an event using the Swoldier HTTP context and returns the resulting output.
      */
     protected function sendEvent(EventInterface $event): string
     {
