@@ -1,6 +1,6 @@
 <?php
 
-namespace DatastarSwoole;
+namespace DatastarSwoldier;
 
 /**
  * Wrapper enum for starfederation\datastar\enums\ElementPatchMode
