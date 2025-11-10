@@ -79,7 +79,6 @@ class SSE
 
         // Initial SSE data to establish the stream.
         $this->ctx->write(":\n\n");
-        $this->sentHeaders = true;
     }
 
     /**
