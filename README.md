@@ -55,6 +55,8 @@ This example covers most of the usage possible with this SDK:
 
 ```php
 use Swoole\{Runtime, Http\Server};
+use Swoldier\{Router, HttpContext};
+
 use DatastarSwoldier\{SSE, ElementPatchMode};
 
 // Replace blocking PHP functions with coroutine-friendly versions
